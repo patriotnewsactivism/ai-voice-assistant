@@ -1,0 +1,7 @@
+total 24
+drwxr-xr-x 2 root root  148 Oct 22 18:50 .
+drwxr-xr-x 3 root root   92 Oct 22 18:49 ..
+-rw-r--r-- 1 root root 4759 Oct 22 18:50 AIResponseHandler.jsx
+-rw-r--r-- 1 root root 3562 Oct 22 18:49 AudioRecorder.jsx
+-rw-r--r-- 1 root root 5440 Oct 22 18:49 SpeechRecognitionComponent.jsx
+-rw-r--r-- 1 root root  461 Oct 22 18:49 TranscriptPolisher.jsx

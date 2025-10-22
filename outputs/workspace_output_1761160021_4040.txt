@@ -1,0 +1,16 @@
+total 48
+drwxr-xr-x 6 root root 4096 Oct 22 19:07 .
+drwxr-xr-x 1 root root  162 Oct 22 18:47 ..
+-rw-r--r-- 1 root root   44 Oct 22 18:50 .env.example
+-rw-r--r-- 1 root root 2085 Oct 22 18:50 README.md
+-rw-r--r-- 1 root root   87 Oct 22 18:47 index.html
+drwxr-xr-x 2 root root 4096 Oct 22 19:07 outputs
+-rw-r--r-- 1 root root  513 Oct 22 18:47 package.json
+-rw-r--r-- 1 root root   79 Oct 22 18:48 postcss.config.js
+drwxr-xr-x 3 root root   92 Oct 22 18:49 src
+drwxr-xr-x 2 root root   63 Oct 22 19:07 summarized_conversations
+-rw-r--r-- 1 root root  181 Oct 22 18:48 tailwind.config.js
+drwxr-xr-x 6 root root 4096 Oct 22 18:53 temp-app
+-rw-r--r-- 1 root root  942 Oct 22 18:54 todo.md
+-rw-r--r-- 1 root root   95 Oct 22 18:50 vercel.json
+-rw-r--r-- 1 root root  214 Oct 22 18:47 vite.config.js

@@ -1,0 +1,6 @@
+total 12
+drwxr-xr-x 3 root root   70 Oct 22 18:53 .
+drwxr-xr-x 6 root root 4096 Oct 22 18:53 ..
+drwxr-xr-x 2 root root   69 Oct 22 18:53 assets
+-rw-r--r-- 1 root root  455 Oct 22 18:53 index.html
+-rw-r--r-- 1 root root 1497 Oct 22 18:53 vite.svg

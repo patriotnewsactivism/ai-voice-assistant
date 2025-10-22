@@ -1,0 +1,13 @@
+total 132
+drwxr-xr-x   5 root root  4096 Oct 22 18:50 .
+drwxr-xr-x   5 root root  4096 Oct 22 18:50 ..
+-rw-r--r--   1 root root   253 Oct 22 18:50 .gitignore
+-rw-r--r--   1 root root  1157 Oct 22 18:50 README.md
+-rw-r--r--   1 root root   763 Oct 22 18:50 eslint.config.js
+-rw-r--r--   1 root root   357 Oct 22 18:50 index.html
+drwxr-xr-x 115 root root  4096 Oct 22 18:50 node_modules
+-rw-r--r--   1 root root 96667 Oct 22 18:50 package-lock.json
+-rw-r--r--   1 root root   605 Oct 22 18:50 package.json
+drwxr-xr-x   2 root root    30 Oct 22 18:50 public
+drwxr-xr-x   3 root root   107 Oct 22 18:50 src
+-rw-r--r--   1 root root   161 Oct 22 18:50 vite.config.js

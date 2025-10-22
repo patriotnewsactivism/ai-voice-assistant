@@ -1,0 +1,7 @@
+total 20
+drwxr-xr-x 3 root root   92 Oct 22 18:49 .
+drwxr-xr-x 6 root root 4096 Oct 22 19:07 ..
+-rw-r--r-- 1 root root 5708 Oct 22 18:49 App.jsx
+drwxr-xr-x 2 root root  148 Oct 22 18:50 components
+-rw-r--r-- 1 root root  618 Oct 22 18:47 index.css
+-rw-r--r-- 1 root root  234 Oct 22 18:47 main.jsx

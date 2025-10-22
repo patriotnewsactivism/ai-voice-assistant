@@ -1,0 +1,9 @@
+
+> always-on-ai-assistant@0.1.0 dev
+> vite
+
+
+  VITE v5.4.21  ready in 134 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: http://172.20.0.43:5173/

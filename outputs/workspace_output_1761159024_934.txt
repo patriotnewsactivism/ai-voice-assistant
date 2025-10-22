@@ -1,0 +1,26 @@
+npm warn exec The following package was not found and will be installed: create-vite@8.0.2
+
+> always-on-ai-assistant@0.1.0 npx
+> "create-vite" temp-app --template react
+
+│
+◇  Scaffolding project in /workspace/temp-app...
+│
+└  Done. Now run:
+
+  cd temp-app
+  npm install
+  npm run dev
+
+npm notice
+npm notice New patch version of npm available! 11.6.0 -> 11.6.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.6.2
+npm notice To update run: npm install -g npm@11.6.2
+npm notice
+
+added 199 packages, and audited 200 packages in 6s
+
+32 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities

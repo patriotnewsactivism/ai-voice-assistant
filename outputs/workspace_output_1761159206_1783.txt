@@ -1,0 +1,13 @@
+
+> temp-app@0.0.0 build
+> vite build
+
+vite v7.1.11 building for production...
+transforming...
+✓ 29 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.46 kB │ gzip:  0.29 kB
+dist/assets/index-rMhOrHBK.css    0.46 kB │ gzip:  0.23 kB
+dist/assets/index-B0a9hi-_.js   202.65 kB │ gzip: 63.55 kB
+✓ built in 1.22s

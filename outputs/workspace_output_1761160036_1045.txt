@@ -1,0 +1,9 @@
+root         131  0.0  0.0 1115564 63448 pts/0   Sl   18:47   0:00 /usr/lib/code-server/lib/node /usr/lib/code-server --trusted-origins=* --bind-addr 127.0.0.1:4000 --auth none --user-data-dir /opt/code-server --extensions-dir /opt/code-server/extensions
+root         208  0.0  0.0 1050380 63240 pts/0   Sl   18:47   0:00 /usr/lib/code-server/lib/node /usr/lib/code-server/out/node/entry
+root         221  0.0  0.0 1125108 71032 pts/0   Sl   18:47   0:02 /usr/local/lib/python3.11/site-packages/playwright/driver/node /usr/local/lib/python3.11/site-packages/playwright/driver/package/cli.js run-driver
+root         705  0.0  0.0      0     0 pts/0    Z+   18:50   0:07 [npm install] <defunct>
+root         809  0.0  0.0      0     0 pts/0    Z+   18:53   0:00 [npm run build] <defunct>
+root         902  0.0  0.0 1090660 52752 pts/0   Sl+  18:54   0:00 npm run dev
+root         919  0.0  0.0   2584  1172 pts/0    S+   18:54   0:00 sh -c vite
+root         920  0.0  0.0 11815908 73908 pts/0  Sl+  18:54   0:00 node /workspace/temp-app/node_modules/.bin/vite
+root         931  0.0  0.0 1242916 13540 pts/0   Sl+  18:54   0:00 /workspace/temp-app/node_modules/@esbuild/linux-x64/bin/esbuild --service=0.25.11 --ping

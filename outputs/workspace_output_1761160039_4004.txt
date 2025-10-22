@@ -1,0 +1,20 @@
+import React, { useState, useRef, useEffect } from 'react';
+
+const App = () => {
+  const [activationKeyword, setActivationKeyword] = useState('assistant');
+  const [isListening, setIsListening] = useState(false);
+  const [conversationHistory, setConversationHistory] = useState([]);
+  const [interimTranscript, setInterimTranscript] = useState('');
+  const [finalTranscript, setFinalTranscript] = useState('');
+  const [aiResponse, setAiResponse] = useState('');
+  const [status, setStatus] = useState({ text: 'Inactive', color: 'bg-red-500', pulse: false });
+  const [recordStatus, setRecordStatus] = useState({ text: 'Recording Inactive', color: 'bg-gray-500', pulse: false });
+  
+  const audioStreamRef = useRef(null);
+  const isRespondingRef = useRef(false);
+  const recognitionRef = useRef(null);
+  const mediaRecorderRef = useRef(null);
+  const audioChunksRef = useRef([]);
+  const globalInterimTranscriptRef = useRef('');
+  const lastFinalTranscriptRef = useRef('');
+
