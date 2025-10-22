@@ -11,7 +11,8 @@ const SpeechRecognitionComponent = ({
   activationKeyword,
   conversationHistory,
   setConversationHistory,
-  isRespondingRef
+  isRespondingRef,
+  onTriggerAi
 }) => {
   const startButtonRef = useRef(null);
 
@@ -85,9 +86,17 @@ const SpeechRecognitionComponent = ({
         const command = (final_transcript + interim_transcript).substring(keywordIndex + activationKeyword.length).trim();
         if (command.length > 2) {
           isRespondingRef.current = true;
-          // Here we would trigger the AI response
-          // For now, we'll just update the status
           setStatus({ text: 'Keyword detected, thinking...', color: 'bg-cyan-500', pulse: true });
+          // Trigger the AI response handler in the parent if provided
+          if (typeof onTriggerAi === 'function') {
+            try {
+              onTriggerAi(command);
+            } catch (err) {
+              console.error('Error calling onTriggerAi:', err);
+              isRespondingRef.current = false;
+              setStatus({ text: 'Listening for keyword...', color: 'bg-green-500', pulse: true });
+            }
+          }
         }
       }
     };

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 
-const AIResponseHandler = ({ conversationHistory, setAiResponse, isRespondingRef, setStatus }) => {
+const AIResponseHandler = forwardRef(({ conversationHistory, setAiResponse, setConversationHistory, isRespondingRef, setStatus }, ref) => {
   const [voice, setVoice] = useState(null);
   
   // Configuration
@@ -94,8 +94,10 @@ const AIResponseHandler = ({ conversationHistory, setAiResponse, isRespondingRef
       if (candidate && candidate.content?.parts?.[0]?.text) {
         const aiText = candidate.content.parts[0].text;
         speakResponse(aiText);
-        // Add AI response to conversation history
-        // This would typically be done in the parent component
+        // Add AI response to conversation history (if setter provided)
+        if (typeof setConversationHistory === 'function') {
+          setConversationHistory(prev => [...prev, `AI: ${aiText.trim()}`]);
+        }
       } else {
         throw new Error("Invalid response structure from API.");
       }
@@ -126,7 +128,20 @@ const AIResponseHandler = ({ conversationHistory, setAiResponse, isRespondingRef
     window.speechSynthesis.speak(utterance);
   };
 
+  // Expose a trigger method to parent via ref
+  useImperativeHandle(ref, () => ({
+    triggerResponse: async (text) => {
+      // guard
+      if (!text || text.length === 0) return;
+      try {
+        await getAiResponse(text);
+      } catch (err) {
+        console.error('Error triggering AI response via ref:', err);
+      }
+    }
+  }));
+
   return null; // This is a utility component with no UI
-};
+});
 
 export default AIResponseHandler;

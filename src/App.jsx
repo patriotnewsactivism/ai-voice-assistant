@@ -3,6 +3,7 @@ import SpeechRecognitionComponent from './components/SpeechRecognitionComponent'
 import TranscriptPolisher from './components/TranscriptPolisher';
 import AIResponseHandler from './components/AIResponseHandler';
 import AudioRecorder from './components/AudioRecorder';
+import { useRef } from 'react';
 
 const App = () => {
   const [activationKeyword, setActivationKeyword] = useState('assistant');
@@ -17,6 +18,7 @@ const App = () => {
   const audioStreamRef = useRef(null);
   const isRespondingRef = useRef(false);
   const recognitionRef = useRef(null);
+  const aiHandlerRef = useRef(null);
 
   return (
     <div className="bg-gray-900 text-white flex flex-col items-center justify-center min-h-screen p-4">
@@ -54,6 +56,14 @@ const App = () => {
               conversationHistory={conversationHistory}
               setConversationHistory={setConversationHistory}
               isRespondingRef={isRespondingRef}
+              onTriggerAi={(command) => {
+                // Call the AI handler via ref
+                if (aiHandlerRef.current && typeof aiHandlerRef.current.triggerResponse === 'function') {
+                  aiHandlerRef.current.triggerResponse(command);
+                } else {
+                  console.warn('AI handler not available');
+                }
+              }}
             />
             <div id="status" className="flex items-center justify-center space-x-3 h-8">
               <div 
@@ -83,6 +93,15 @@ const App = () => {
             </div>
           </div>
         </div>
+        {/* AI handler (invisible) */}
+        <AIResponseHandler
+          ref={aiHandlerRef}
+          conversationHistory={conversationHistory}
+          setAiResponse={setAiResponse}
+          setConversationHistory={setConversationHistory}
+          isRespondingRef={isRespondingRef}
+          setStatus={setStatus}
+        />
 
         <div className="space-y-4">
           <div>
