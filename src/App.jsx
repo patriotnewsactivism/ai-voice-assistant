@@ -1,9 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import SpeechRecognitionComponent from './components/SpeechRecognitionComponent';
 import TranscriptPolisher from './components/TranscriptPolisher';
 import AIResponseHandler from './components/AIResponseHandler';
 import AudioRecorder from './components/AudioRecorder';
-import { useRef } from 'react';
 
 const App = () => {
   const [activationKeyword, setActivationKeyword] = useState('assistant');
