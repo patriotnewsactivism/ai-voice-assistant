@@ -16,6 +16,8 @@ const SpeechRecognitionComponent = ({
 }) => {
   const startButtonRef = useRef(null);
 
+  const fullTranscriptRef = useRef('');
+
   useEffect(() => {
     // Initialize speech recognition
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -31,7 +33,10 @@ const SpeechRecognitionComponent = ({
     recognitionRef.current.lang = 'en-US';
 
     // Set up recognition event handlers
-    recognitionRef.current.onstart = () => console.log('Speech recognition started.');
+    recognitionRef.current.onstart = () => {
+      console.log('Speech recognition started.');
+      fullTranscriptRef.current = '';
+    };
     
     recognitionRef.current.onend = () => {
       console.log('Speech recognition ended.');
@@ -58,7 +63,7 @@ const SpeechRecognitionComponent = ({
       let interim_transcript = '';
       let final_transcript = '';
       
-      for (let i = 0; i < event.results.length; ++i) {
+      for (let i = event.resultIndex; i < event.results.length; ++i) {
         const transcript_chunk = event.results[i][0].transcript;
         if (event.results[i].isFinal) {
           final_transcript += transcript_chunk;
@@ -67,10 +72,14 @@ const SpeechRecognitionComponent = ({
         }
       }
       
-      setInterimTranscript(final_transcript + interim_transcript);
+      // Build the full utterance for display
+      const currentUtterance = fullTranscriptRef.current + final_transcript + interim_transcript;
+      setInterimTranscript(currentUtterance);
 
       // Handle final transcript
       if (final_transcript && final_transcript.length > 0) {
+        fullTranscriptRef.current += final_transcript;
+        
         // Add to conversation history
         setConversationHistory(prev => [...prev, final_transcript.trim()]);
         
@@ -78,18 +87,35 @@ const SpeechRecognitionComponent = ({
         setFinalTranscript(prev => prev + (prev ? '\n' : '') + final_transcript.trim());
       }
 
-      // Keyword detection
-      const lowerCaseUtterance = (final_transcript + interim_transcript).toLowerCase();
-      const keywordIndex = lowerCaseUtterance.lastIndexOf(activationKeyword);
+      // Keyword detection - check the full accumulated transcript
+      const lowerCaseUtterance = currentUtterance.toLowerCase();
+      const lowerKeyword = activationKeyword.toLowerCase();
+      const keywordIndex = lowerCaseUtterance.lastIndexOf(lowerKeyword);
 
-      if (keywordIndex > -1 && !isRespondingRef.current) { 
-        const command = (final_transcript + interim_transcript).substring(keywordIndex + activationKeyword.length).trim();
-        if (command.length > 2) {
+      if (keywordIndex > -1 && !isRespondingRef.current) {
+        // Extract everything after the keyword
+        const afterKeyword = currentUtterance.substring(keywordIndex + activationKeyword.length).trim();
+        
+        console.log('Keyword detected! After keyword:', afterKeyword);
+        
+        // Only trigger if there's meaningful content after the keyword or if final transcript detected
+        if (afterKeyword.length > 0 || final_transcript) {
+          // Wait a moment for more speech if this is interim
+          if (interim_transcript && !final_transcript) {
+            // Don't trigger yet, wait for final transcript
+            return;
+          }
+          
+          const command = afterKeyword || "help"; // Default to "help" if no command given
+          
           isRespondingRef.current = true;
+          fullTranscriptRef.current = ''; // Reset for next interaction
           setStatus({ text: 'Keyword detected, thinking...', color: 'bg-cyan-500', pulse: true });
+          
           // Trigger the AI response handler in the parent if provided
           if (typeof onTriggerAi === 'function') {
             try {
+              console.log('Triggering AI with command:', command);
               onTriggerAi(command);
             } catch (err) {
               console.error('Error calling onTriggerAi:', err);
@@ -107,7 +133,7 @@ const SpeechRecognitionComponent = ({
         recognitionRef.current.stop();
       }
     };
-  }, [isListening, activationKeyword]);
+  }, [isListening, activationKeyword, setInterimTranscript, setFinalTranscript, setStatus, setConversationHistory, isRespondingRef, onTriggerAi]);
 
   const startListening = async () => {
     if (isListening || !recognitionRef.current) return;
